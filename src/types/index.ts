@@ -46,7 +46,6 @@ export interface LoadingState {
   message: string;
 }
 
-// Types for Candidate Profile
 export interface UserProfile {
   id: number;
   full_name: string;
@@ -55,6 +54,7 @@ export interface UserProfile {
   city?: string;
   lat?: number;
   lon?: number;
+  created_at?: string;
 }
 
 export interface CV {
@@ -70,6 +70,7 @@ export interface CV {
   category: string;
   version: number;
   is_primary: boolean;
+  created_at?: string;
 }
 
 export interface ParsedData {
@@ -89,13 +90,14 @@ export interface CVCategory {
   latestCv: CV;
   versions: CV[];
 }
-
 export interface RecommendedCV {
   cv: CV;
+  score?: number;  // Añadido
   reasons?: {
     requiredMatches: number;
     preferredMatches: number;
     jobDescriptionMatches: number;
+    jdMatches?: number;  // Para compatibilidad
     experienceOK: boolean;
     distanceKm?: number;
   };

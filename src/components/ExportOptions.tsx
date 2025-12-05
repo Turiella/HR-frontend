@@ -101,7 +101,7 @@ export const exportEnhancedCSV = (candidates: any[], searchParams: any) => {
   const csvContent = [
     ...metadata,
     ...rows.map(row => row.map(cell => `"${String(cell).replace(/"/g, '""')}"`))
-  ].map(row => row.join(',')).join('\n');
+  ].map(row => Array.isArray(row) ? row.join(',') : String(row)).join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
