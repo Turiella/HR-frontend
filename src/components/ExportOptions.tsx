@@ -63,20 +63,20 @@ export const exportEnhancedCSV = (candidates: any[], searchParams: any) => {
     'User ID'
   ];
 
-  const rows = candidates.map((candidate, index) => [
+  const rows = candidates.map((candidate: any, index: number) => [
     index + 1,
     candidate.fullName || '',
     candidate.email || '',
     candidate.score?.toFixed(2) || '0',
     candidate.experienceYears || 0,
-    (candidate.skills || []).join('; '),
+    Array.isArray(candidate.skills) ? candidate.skills.join('; ') : '',
     candidate.reasons?.requiredMatches || 0,
     candidate.reasons?.preferredMatches || 0,
     candidate.reasons?.jobDescriptionMatches || 0,
     candidate.reasons?.experienceOK ? 'Sí' : 'No',
     candidate.city || '',
     candidate.gender || '',
-    (candidate.education || []).join('; '),
+    Array.isArray(candidate.education) ? candidate.education.join('; ') : '',
     candidate.reasons?.distanceKm || '',
     candidate.cvId || '',
     candidate.userId || ''
@@ -113,7 +113,7 @@ export const exportEnhancedCSV = (candidates: any[], searchParams: any) => {
 };
 
 // PDF export using jsPDF (would need to install jsPDF)
-export const exportPDF = (candidates: any[], searchParams: any) => {
+export const exportPDF = () => {
   // This is a placeholder for PDF export
   // In a real implementation, you would use a library like jsPDF
   alert('Exportación PDF coming soon! Por ahora usa CSV.');
