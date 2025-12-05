@@ -1,4 +1,4 @@
-import { Candidate, SearchParams } from '../types';
+import type { Candidate, SearchParams } from '../types';
 
 // Enhanced CSV export with more data
 export const exportEnhancedCSV = (candidates: Candidate[], searchParams: SearchParams) => {

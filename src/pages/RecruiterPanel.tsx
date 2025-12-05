@@ -9,7 +9,8 @@ import { Autocomplete } from '../components/Autocomplete';
 import { techSkills, cities as citySuggestions } from '../constants/suggestions';
 import { Slider } from '../components/Slider';
 import { Analytics } from '../components/Analytics';
-import { ExportOptions, exportEnhancedCSV } from '../components/ExportOptions';
+import { ExportOptions } from '../components/ExportOptions';
+import { exportEnhancedCSV } from '../utils/exportUtils';
 import LogoutButton from '../components/LogoutButton';
 
 export default function RecruiterPanel() {

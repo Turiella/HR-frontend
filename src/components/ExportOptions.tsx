@@ -1,5 +1,5 @@
 import React from 'react';
-import { Candidate, SearchParams } from '../types';
+import type { Candidate } from '../types';
 
 interface ExportOptionsProps {
   candidates: Candidate[];
