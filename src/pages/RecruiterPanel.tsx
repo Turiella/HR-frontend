@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import { MESSAGES } from '../constants/messages';
 import { getRanking, getCvCount } from '../api/ranking';
 import type { RankingRequest } from '../api/ranking';
 import type { Candidate, RankingResult, SearchParams } from '../types';
 import { ScoreBar, SkillTag, MatchIndicator, LoadingSpinner } from '../components/UIComponents';
 import { SearchPresets, FieldHelp } from '../components/SearchHelpers';
-import { searchPresets } from '../constants/presets';
 import { Autocomplete } from '../components/Autocomplete';
 import { techSkills, cities as citySuggestions } from '../constants/suggestions';
 import { Slider } from '../components/Slider';
@@ -19,6 +19,15 @@ export default function RecruiterPanel() {
   const [preferredSkills, setPreferredSkills] = useState('docker');
   const [minExperience, setMinExperience] = useState(2);
   const [loading, setLoading] = useState(false);
+
+  interface SearchPreset {
+    name: string;
+    description: string;
+    requiredSkills: string[];
+    preferredSkills: string[];
+    minExperience: number;
+    jobDescription: string;
+  }
   const [loadingProgress, setLoadingProgress] = useState<number | undefined>();
   const [loadingMessage, setLoadingMessage] = useState('Analizando candidatos...');
   const [result, setResult] = useState<RankingResult | null>(null);
@@ -82,9 +91,12 @@ export default function RecruiterPanel() {
       try {
         const data = await getCvCount();
         setCvCount(data.count);
-      } catch (error) {
-      console.error('Error loading CV count:', error);
-    }
+      } catch (error: unknown) {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Error loading CV count:', error);
+        }
+        alert(MESSAGES.ERROR.LOADING_CV_COUNT);
+      }
     };
     run();
   }, []);
@@ -129,23 +141,19 @@ export default function RecruiterPanel() {
         setLoading(false);
         setLoadingProgress(undefined);
       }, 500);
-    } catch (error) {
-      console.error('Error generating ranking:', error);
-      alert('Error generando ranking');
+    } catch {
+      alert(MESSAGES.ERROR.GENERATING_RANKING);
       setLoading(false);
       setLoadingProgress(undefined);
     }
   };
 
-  const applyPreset = (preset: typeof searchPresets[0]) => {
+  const applyPreset = (preset: SearchPreset) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Applying preset:', preset);
+    }
     const requiredSkillsStr = preset.requiredSkills.map(skill => skill.trim()).join(', ');
     const preferredSkillsStr = preset.preferredSkills.map(skill => skill.trim()).join(', ');
-    
-    console.log('Applying preset:', {
-      name: preset.name,
-      requiredSkills: requiredSkillsStr,
-      preferredSkills: preferredSkillsStr
-    });
     
     setRequiredSkills(requiredSkillsStr);
     setPreferredSkills(preferredSkillsStr);
@@ -183,24 +191,14 @@ export default function RecruiterPanel() {
   };
 
   const downloadPDF = () => {
-    // Placeholder for PDF export
-    alert('Exportación PDF coming soon! Por ahora usa CSV.');
+    alert(MESSAGES.EXPORT.PDF_COMING_SOON);
   };
 
   return (
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl pl-[calc(1.5rem+20px)] pr-6 py-6 mx-auto">
       {/* Header Compacto */}
-      <div 
-        className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl"
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.1)',
-          backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255, 255, 255, 0.2)',
-          borderRadius: '16px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-        }}
-      >
+      <div className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-white flex items-center">
@@ -223,20 +221,12 @@ export default function RecruiterPanel() {
         </div>
       </div>
 
-      {/* Presets Section */}
-      <SearchPresets onApplyPreset={applyPreset} />
-
-      {/* Filtros de Búsqueda */}
-      <div 
-        className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl"
-        style={{
-          backgroundColor: 'rgba(255, 255, 255, 0.05)',
-          backdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          borderRadius: '16px',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
-        }}
-      >
+      {/* Layout con CSS Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '20px', alignItems: 'start' }}>
+        {/* Columna izquierda - Contenido principal */}
+        <div>
+          {/* Filtros de Búsqueda */}
+          <div className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
         <h2 className="text-lg font-semibold mb-4 text-white flex items-center">
           <span className="text-xs mr-2">🔍</span>
           Filtros de Búsqueda
@@ -461,17 +451,7 @@ export default function RecruiterPanel() {
 
           {/* Candidates */}
           {pageItems.map((c: Candidate, index: number) => (
-            <div key={c.cvId} 
-            className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl hover:bg-white/10 transition-all shadow-lg"
-            style={{
-              backgroundColor: 'rgba(255, 255, 255, 0.05)',
-              backdropFilter: 'blur(16px)',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: '12px',
-              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
-              transition: 'all 0.3s ease'
-            }}
-          >
+            <div key={c.cvId} className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl hover:bg-white/10 transition-all shadow-lg">
               {/* Header with Score */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                 <div className="flex items-center gap-3">
@@ -621,9 +601,18 @@ export default function RecruiterPanel() {
 
       {result && result.count === 0 && !loading && (
         <div className="p-6 mt-4 text-sm text-gray-300 bg-white/5 border border-white/10 rounded-lg">
-          No se encontraron candidatos con los filtros actuales. Probá quitar alguna skill requerida o bajar el mínimo de experiencia.
+          {MESSAGES.SEARCH.NO_RESULTS}
         </div>
       )}
+        </div>
+
+        {/* Columna derecha - Presets */}
+        <div>
+          <div className="glass-container">
+            <SearchPresets onApplyPreset={applyPreset} />
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   );

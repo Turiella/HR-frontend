@@ -21,45 +21,45 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
 
   return (
     <div className="mb-6">
-      <h3 className="text-sm font-semibold text-gray-300 mb-4 flex items-center">
-        <span className="mr-2 text-xs">🚀</span>
+      <h3 className="glass-title flex items-center text-sm">
+        <span className="mr-2">🚀</span>
         Búsquedas Rápidas (Presets)
       </h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         {searchPresets.map((preset) => (
           <div
             key={preset.name}
             className={`
-              p-4 rounded-xl border cursor-pointer transition-all duration-200 group
-              ${selectedPreset === preset.name 
-                ? 'border-indigo-500 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 shadow-lg shadow-indigo-500/20' 
-                : 'border-gray-700 bg-gray-800/30 hover:border-gray-600 hover:bg-gray-800/50 hover:shadow-md hover:shadow-gray-900/20'
-              }
+              glass-item cursor-pointer transition-all duration-200 group
+              ${selectedPreset === preset.name ? 'ring-2 ring-indigo-400' : ''}
             `}
             onClick={() => {
               setSelectedPreset(preset.name);
               onApplyPreset(preset);
             }}
           >
-            <div className="flex items-center mb-3">
-              <span className="text-lg mr-2 group-hover:scale-110 transition-transform">{preset.icon}</span>
-              <span className="font-semibold text-white text-sm">{preset.name}</span>
+            <div className="flex items-center mb-1">
+              <span className="text-base mr-2 group-hover:scale-110 transition-transform">{preset.icon}</span>
+              <span className="font-semibold text-white text-xs">{preset.name}</span>
             </div>
-            <p className="text-xs text-gray-400 mb-3 leading-relaxed">{preset.description}</p>
-            <div className="space-y-2">
+            <p className="glass-text text-gray-300 mb-2">{preset.description}</p>
+            <div className="space-y-1">
               <div className="flex flex-wrap">
                 {preset.requiredSkills.slice(0, 3).map(skill => (
-                  <span key={skill} className="inline-block text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-md font-medium mr-2 mb-2" style={{marginRight: '8px', marginBottom: '8px'}}>
+                  <span 
+                    key={skill} 
+                    className="inline-block text-2xs bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded font-medium mr-1 mb-1"
+                  >
                     {skill}
                   </span>
                 ))}
                 {preset.requiredSkills.length > 3 && (
-                  <span className="text-xs text-gray-500 px-2 py-1">+{preset.requiredSkills.length - 3}</span>
+                  <span className="text-2xs text-gray-400 px-1">+{preset.requiredSkills.length - 3}</span>
                 )}
               </div>
-              <div className="flex items-center text-xs text-gray-500">
-                <span className="mr-1">⏱️</span>
-                <span>{preset.minExperience}+ años exp.</span>
+              <div className="flex items-center text-2xs text-gray-400">
+                <span className="mr-0.5">⏱️</span>
+                <span>{preset.minExperience}+ años</span>
               </div>
             </div>
           </div>

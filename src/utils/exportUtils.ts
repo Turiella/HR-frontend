@@ -1,4 +1,5 @@
 import type { Candidate, SearchParams } from '../types';
+import { MESSAGES } from '../constants/messages';
 
 // Enhanced CSV export with more data
 export const exportEnhancedCSV = (candidates: Candidate[], searchParams: SearchParams) => {
@@ -73,7 +74,7 @@ export const exportEnhancedCSV = (candidates: Candidate[], searchParams: SearchP
 export const exportPDF = () => {
   // This is a placeholder for PDF export
   // In a real implementation, you would use a library like jsPDF
-  alert('Exportación PDF coming soon! Por ahora usa CSV.');
+  alert(MESSAGES.EXPORT.PDF_COMING_SOON);
 };
 
 // Share functionality

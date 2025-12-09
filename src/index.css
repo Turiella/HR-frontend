@@ -3,6 +3,118 @@
 @tailwind utilities;
 
 :root {
+  --glass-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  --glass-border: 1px solid rgba(99, 102, 241, 0.2);
+  --glass-shadow: 0 2px 8px 0 rgba(99, 102, 241, 0.15);
+  --glass-blur: blur(8px);
+  
+  --glass-item-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+  --glass-item-border: 1px solid rgba(99, 102, 241, 0.15);
+  --glass-item-shadow: 0 3px 10px 0 rgba(99, 102, 241, 0.2);
+}
+
+.glass-container {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: 8px;
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  padding: 0.75rem;
+}
+
+.glass-item {
+  background: var(--glass-item-bg) !important;
+  border: var(--glass-item-border) !important;
+  border-radius: 4px !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  transition: all 0.3s ease !important;
+  margin-bottom: 0.25rem !important;
+  padding: 0.25rem 0.5rem !important;
+}
+
+.glass-item:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(139, 92, 246, 0.06) 100%) !important;
+  border-color: rgba(99, 102, 241, 0.25) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: var(--glass-item-shadow) !important;
+}
+
+.glass-title {
+  color: white !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.75rem !important;
+}
+
+.glass-text {
+  font-size: 0.7rem !important;
+  line-height: 1.1 !important;
+}
+
+/* Glassmorphism para SearchPresets */
+.search-presets-container {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  padding: 16px !important;
+}
+
+.search-presets-container h3 {
+  color: white !important;
+  font-weight: 600 !important;
+  margin-bottom: 16px !important;
+}
+
+.search-presets-item {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.search-presets-item:hover {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.35) !important;
+}
+
+/* Glassmorphism global styles */
+.glassmorphism-header {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+.glassmorphism-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+.glassmorphism-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+:root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
