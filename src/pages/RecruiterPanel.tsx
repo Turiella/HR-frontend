@@ -226,7 +226,7 @@ export default function RecruiterPanel() {
         <div className="grid gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
             <label className="block mb-1 text-sm font-medium flex items-center">
-              Required skills (coma separadas)
+              Habilidades Requeridas (coma separadas)
               <FieldHelp 
                 field="Habilidades Requeridas" 
                 example="node, postgres, typescript" 
@@ -243,7 +243,7 @@ export default function RecruiterPanel() {
           </div>
           <div className="md:col-span-1">
             <label className="block mb-1 text-sm font-medium flex items-center">
-              Preferred skills (coma separadas)
+              Habilidades Preferidas (coma separadas)
               <FieldHelp 
                 field="Habilidades Preferidas" 
                 example="docker, aws, react" 
