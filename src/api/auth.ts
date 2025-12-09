@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API = import.meta.env.VITE_API_BASE;
+const API = import.meta.env.VITE_API_BASE || 'https://hr-production-c212.up.railway.app/api';
 console.log('API URL:', API); //
 
 const apiClient = axios.create({
