@@ -50,11 +50,14 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
             <p className="text-xs text-gray-400 mb-3 leading-relaxed">{preset.description}</p>
             <div className="space-y-2">
               <div className="flex flex-wrap gap-2">
-                {preset.requiredSkills.slice(0, 3).map(skill => (
+                {preset.requiredSkills.slice(0, 3).map(skill => {
+                  console.log('Rendering skill:', skill);
+                  return (
                   <span key={skill} className="text-xs bg-green-500/20 text-green-300 px-2 py-1 rounded-md font-medium">
                     {skill}
                   </span>
-                ))}
+                  );
+                })}
                 {preset.requiredSkills.length > 3 && (
                   <span className="text-xs text-gray-500 px-2 py-1">+{preset.requiredSkills.length - 3}</span>
                 )}
