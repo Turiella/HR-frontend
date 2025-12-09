@@ -26,7 +26,9 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
         Búsquedas Rápidas (Presets)
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {searchPresets.map((preset) => (
+        {searchPresets.map((preset) => {
+          console.log('Preset data:', preset.name, preset.requiredSkills);
+          return (
           <div
             key={preset.name}
             className={`
@@ -63,7 +65,8 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
               </div>
             </div>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
