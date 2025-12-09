@@ -140,8 +140,8 @@ export default function RecruiterPanel() {
   };
 
   const applyPreset = (preset: typeof searchPresets[0]) => {
-    const requiredSkillsStr = preset.requiredSkills.join(', ');
-    const preferredSkillsStr = preset.preferredSkills.join(', ');
+    const requiredSkillsStr = preset.requiredSkills.map(skill => skill.trim()).join(', ');
+    const preferredSkillsStr = preset.preferredSkills.map(skill => skill.trim()).join(', ');
     
     console.log('Applying preset:', {
       name: preset.name,
