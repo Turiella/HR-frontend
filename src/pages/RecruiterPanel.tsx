@@ -80,8 +80,7 @@ export default function RecruiterPanel() {
   useEffect(() => {
     const run = async () => {
       try {
-        const token = localStorage.getItem('token') || '';
-        const data = await getCvCount(token);
+        const data = await getCvCount();
         setCvCount(data.count);
       } catch (error) {
       console.error('Error loading CV count:', error);
@@ -119,8 +118,7 @@ export default function RecruiterPanel() {
         cities: cities.split(',').map(s => s.trim()).filter(Boolean),
         maxDistanceKm: maxDistanceKm ? Number(maxDistanceKm) : undefined
       };
-      const token = localStorage.getItem('token') || '';
-      const data = await getRanking(payload, token);
+      const data = await getRanking(payload);
       
       setLoadingProgress(100);
       setLoadingMessage('¡Búsqueda completada!');
