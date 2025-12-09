@@ -120,15 +120,15 @@ interface FieldHelpProps {
 
 export const FieldHelp: React.FC<FieldHelpProps> = ({ field, example, tip }) => {
   const helpContent = (
-    <div>
-      <p className="font-semibold mb-1">{field}</p>
+    <div className="space-y-2">
+      <p className="font-semibold text-white">{field}</p>
       {example && (
-        <p className="mb-1">
-          <span className="text-yellow-300">Ejemplo:</span> {example}
+        <p className="text-sm">
+          <span className="text-yellow-300 font-medium">Ejemplo:</span> {example}
         </p>
       )}
       {tip && (
-        <p className="text-gray-300 text-xs">{tip}</p>
+        <p className="text-sm text-gray-200">{tip}</p>
       )}
     </div>
   );
