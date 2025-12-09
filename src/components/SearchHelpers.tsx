@@ -99,19 +99,19 @@ export const Tooltip: React.FC<TooltipProps> = ({ children, content, position = 
           className={`absolute z-50 ${positionClasses[position]} w-96 p-4 bg-gray-900/98 backdrop-blur-md text-white text-sm rounded-xl shadow-2xl border border-gray-700`}
           style={{
             width: '384px',
-            backgroundColor: 'rgba(17, 24, 39, 0.98)',
+            backgroundColor: 'rgba(96, 165, 250, 0.98)',
             backdropFilter: 'blur(12px)',
             padding: '16px',
             borderRadius: '12px',
-            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-            border: '1px solid rgb(55, 65, 81)'
+            boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.25)',
+            border: '1px solid rgb(59, 130, 246)'
           }}
         >
           <div className="relative">
-            <div className="font-medium text-gray-50 leading-relaxed">{content}</div>
+            <div className="font-medium text-gray-800 leading-relaxed">{content}</div>
             <div 
               className={`
-                absolute w-3 h-3 bg-gray-900/98 border-l border-b border-gray-700 transform rotate-45
+                absolute w-3 h-3 bg-blue-400/98 border-l border-b border-blue-500 transform rotate-45
                 ${position === 'top' ? 'bottom-full -mb-1.5' : ''}
                 ${position === 'bottom' ? 'top-full -mt-1.5' : ''}
                 ${position === 'left' ? 'right-full -mr-1.5' : ''}
@@ -120,9 +120,9 @@ export const Tooltip: React.FC<TooltipProps> = ({ children, content, position = 
               style={{
                 width: '12px',
                 height: '12px',
-                backgroundColor: 'rgba(17, 24, 39, 0.98)',
-                borderLeft: '1px solid rgb(55, 65, 81)',
-                borderBottom: '1px solid rgb(55, 65, 81)'
+                backgroundColor: 'rgba(96, 165, 250, 0.98)',
+                borderLeft: '1px solid rgb(59, 130, 246)',
+                borderBottom: '1px solid rgb(59, 130, 246)'
               }}
             />
           </div>
@@ -141,14 +141,14 @@ interface FieldHelpProps {
 export const FieldHelp: React.FC<FieldHelpProps> = ({ field, example, tip }) => {
   const helpContent = (
     <div className="space-y-2">
-      <p className="font-semibold text-white">{field}</p>
+      <p className="font-semibold text-gray-800">{field}</p>
       {example && (
         <p className="text-sm">
-          <span className="text-yellow-300 font-medium">Ejemplo:</span> {example}
+          <span className="text-blue-700 font-medium">Ejemplo:</span> {example}
         </p>
       )}
       {tip && (
-        <p className="text-sm text-gray-200">{tip}</p>
+        <p className="text-sm text-gray-700">{tip}</p>
       )}
     </div>
   );
