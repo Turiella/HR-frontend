@@ -44,18 +44,27 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
             </div>
             <p className="glass-text text-gray-300 mb-2">{preset.description}</p>
             <div className="space-y-1">
-              <div className="flex flex-wrap">
-                {preset.requiredSkills.slice(0, 3).map(skill => (
-                  <span 
-                    key={skill} 
-                    className="inline-block text-2xs bg-green-500/20 text-green-300 px-1.5 py-0.5 rounded font-medium mr-1 mb-1"
-                  >
-                    {skill}
-                  </span>
-                ))}
-                {preset.requiredSkills.length > 3 && (
-                  <span className="text-2xs text-gray-400 px-1">+{preset.requiredSkills.length - 3}</span>
-                )}
+              <div className="flex flex-wrap gap-1">
+                {Array.isArray(preset.requiredSkills) 
+                  ? preset.requiredSkills.map((skill, index) => (
+                      <span 
+                        key={index}
+                        className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
+                      >
+                        {skill}
+                      </span>
+                    ))
+                  : String(preset.requiredSkills || '')
+                      .split(',')
+                      .map((skill, index) => (
+                        <span 
+                          key={index}
+                          className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
+                        >
+                          {skill.trim()}
+                        </span>
+                      ))
+                }
               </div>
               <div className="flex items-center text-2xs text-gray-400">
                 <span className="mr-0.5">⏱️</span>

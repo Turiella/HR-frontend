@@ -32,6 +32,7 @@ export default function RecruiterPanel() {
   const [loadingMessage, setLoadingMessage] = useState('Analizando candidatos...');
   const [result, setResult] = useState<RankingResult | null>(null);
   const [cvCount, setCvCount] = useState<number | null>(null);
+  const [isCvCountLoaded, setIsCvCountLoaded] = useState(false);
   const [sortBy, setSortBy] = useState<'score' | 'experience' | 'name'>('score');
   const [sortDir, setSortDir] = useState<'desc' | 'asc'>('desc');
   const [page, setPage] = useState(1);
@@ -85,21 +86,24 @@ export default function RecruiterPanel() {
     }
   }, []);
 
-  // Load CV count once on mount
-  useEffect(() => {
-    const run = async () => {
-      try {
-        const data = await getCvCount();
-        setCvCount(data.count);
-      } catch (error: unknown) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error('Error loading CV count:', error);
-        }
-        alert(MESSAGES.ERROR.LOADING_CV_COUNT);
+useEffect(() => {
+  if (isCvCountLoaded) return;
+
+  const fetchCvCount = async () => {
+    try {
+      const data = await getCvCount();
+      setCvCount(data.count);
+      setIsCvCountLoaded(true);
+    } catch (error: unknown) {
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error loading CV count:', error);
       }
-    };
-    run();
-  }, []);
+      alert(MESSAGES.ERROR.LOADING_CV_COUNT);
+    }
+  };
+
+  fetchCvCount();
+}, [isCvCountLoaded]);
 
   const handleRank = async () => {
     setLoading(true);
@@ -152,11 +156,13 @@ export default function RecruiterPanel() {
     if (process.env.NODE_ENV === 'development') {
       console.log('Applying preset:', preset);
     }
-    const requiredSkillsStr = preset.requiredSkills.map(skill => skill.trim()).join(', ');
-    const preferredSkillsStr = preset.preferredSkills.map(skill => skill.trim()).join(', ');
-    
-    setRequiredSkills(requiredSkillsStr);
-    setPreferredSkills(preferredSkillsStr);
+    // Mantener los skills como arrays
+    setRequiredSkills(Array.isArray(preset.requiredSkills) 
+      ? preset.requiredSkills.join(', ') 
+      : preset.requiredSkills);
+    setPreferredSkills(Array.isArray(preset.preferredSkills) 
+      ? preset.preferredSkills.join(', ')
+      : preset.preferredSkills);
     setMinExperience(preset.minExperience);
     setJobDescription(preset.jobDescription);
   };
