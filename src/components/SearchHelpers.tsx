@@ -95,15 +95,15 @@ export const Tooltip: React.FC<TooltipProps> = ({ children, content, position = 
         {children}
       </div>
       {isVisible && (
-        <div className={`absolute z-10 ${positionClasses[position]} w-64 p-2 bg-gray-900 text-white text-xs rounded-lg shadow-lg border border-gray-700`}>
+        <div className={`absolute z-50 ${positionClasses[position]} w-96 p-4 bg-gray-900/98 backdrop-blur-md text-white text-sm rounded-xl shadow-2xl border border-gray-700`}>
           <div className="relative">
-            {content}
+            <div className="font-medium text-gray-50 leading-relaxed">{content}</div>
             <div className={`
-              absolute w-2 h-2 bg-gray-900 border-l border-b border-gray-700 transform rotate-45
-              ${position === 'top' ? 'bottom-full -mb-1' : ''}
-              ${position === 'bottom' ? 'top-full -mt-1' : ''}
-              ${position === 'left' ? 'right-full -mr-1' : ''}
-              ${position === 'right' ? 'left-full -ml-1' : ''}
+              absolute w-3 h-3 bg-gray-900/98 border-l border-b border-gray-700 transform rotate-45
+              ${position === 'top' ? 'bottom-full -mb-1.5' : ''}
+              ${position === 'bottom' ? 'top-full -mt-1.5' : ''}
+              ${position === 'left' ? 'right-full -mr-1.5' : ''}
+              ${position === 'right' ? 'left-full -ml-1.5' : ''}
             `} />
           </div>
         </div>
