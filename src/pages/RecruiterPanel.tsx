@@ -191,7 +191,16 @@ export default function RecruiterPanel() {
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl pl-[calc(1.5rem+20px)] pr-6 py-6 mx-auto">
       {/* Header Compacto */}
-      <div className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
+      <div 
+        className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.2)',
+          borderRadius: '16px',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        }}
+      >
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-white flex items-center">
@@ -218,7 +227,16 @@ export default function RecruiterPanel() {
       <SearchPresets onApplyPreset={applyPreset} />
 
       {/* Filtros de Búsqueda */}
-      <div className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
+      <div 
+        className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.05)',
+          backdropFilter: 'blur(16px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '16px',
+          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+        }}
+      >
         <h2 className="text-lg font-semibold mb-4 text-white flex items-center">
           <span className="text-xs mr-2">🔍</span>
           Filtros de Búsqueda
@@ -443,7 +461,17 @@ export default function RecruiterPanel() {
 
           {/* Candidates */}
           {pageItems.map((c: Candidate, index: number) => (
-            <div key={c.cvId} className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl hover:bg-white/10 transition-all shadow-lg">
+            <div key={c.cvId} 
+            className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl hover:bg-white/10 transition-all shadow-lg"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.05)',
+              backdropFilter: 'blur(16px)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '12px',
+              boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)',
+              transition: 'all 0.3s ease'
+            }}
+          >
               {/* Header with Score */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                 <div className="flex items-center gap-3">
