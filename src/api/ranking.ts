@@ -1,7 +1,6 @@
-import axios from 'axios';
+import { apiClient } from './auth';
 
-const API = '/api'; // Usar ruta relativa para que el proxy de Vite funcione
-
+// Updated API calls to use apiClient with proper baseURL
 export interface RankingRequest {
   jobDescription?: string;
   requiredSkills?: string[];
@@ -9,16 +8,12 @@ export interface RankingRequest {
   minExperience?: number;
 }
 
-export const getRanking = async (payload: RankingRequest, token: string) => {
-  const res = await axios.post(`${API}/ranking`, payload, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+export const getRanking = async (payload: RankingRequest) => {
+  const res = await apiClient.post('/ranking', payload);
   return res.data;
 };
 
-export const getCvCount = async (token: string) => {
-  const res = await axios.get(`${API}/cvs/meta/count`, {
-    headers: { Authorization: `Bearer ${token}` }
-  });
+export const getCvCount = async () => {
+  const res = await apiClient.get('/cvs/meta/count');
   return res.data as { count: number };
 };
