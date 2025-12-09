@@ -95,16 +95,36 @@ export const Tooltip: React.FC<TooltipProps> = ({ children, content, position = 
         {children}
       </div>
       {isVisible && (
-        <div className={`absolute z-50 ${positionClasses[position]} w-96 p-4 bg-gray-900/98 backdrop-blur-md text-white text-sm rounded-xl shadow-2xl border border-gray-700`}>
+        <div 
+          className={`absolute z-50 ${positionClasses[position]} w-96 p-4 bg-gray-900/98 backdrop-blur-md text-white text-sm rounded-xl shadow-2xl border border-gray-700`}
+          style={{
+            width: '384px',
+            backgroundColor: 'rgba(17, 24, 39, 0.98)',
+            backdropFilter: 'blur(12px)',
+            padding: '16px',
+            borderRadius: '12px',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            border: '1px solid rgb(55, 65, 81)'
+          }}
+        >
           <div className="relative">
             <div className="font-medium text-gray-50 leading-relaxed">{content}</div>
-            <div className={`
-              absolute w-3 h-3 bg-gray-900/98 border-l border-b border-gray-700 transform rotate-45
-              ${position === 'top' ? 'bottom-full -mb-1.5' : ''}
-              ${position === 'bottom' ? 'top-full -mt-1.5' : ''}
-              ${position === 'left' ? 'right-full -mr-1.5' : ''}
-              ${position === 'right' ? 'left-full -ml-1.5' : ''}
-            `} />
+            <div 
+              className={`
+                absolute w-3 h-3 bg-gray-900/98 border-l border-b border-gray-700 transform rotate-45
+                ${position === 'top' ? 'bottom-full -mb-1.5' : ''}
+                ${position === 'bottom' ? 'top-full -mt-1.5' : ''}
+                ${position === 'left' ? 'right-full -mr-1.5' : ''}
+                ${position === 'right' ? 'left-full -ml-1.5' : ''}
+              `}
+              style={{
+                width: '12px',
+                height: '12px',
+                backgroundColor: 'rgba(17, 24, 39, 0.98)',
+                borderLeft: '1px solid rgb(55, 65, 81)',
+                borderBottom: '1px solid rgb(55, 65, 81)'
+              }}
+            />
           </div>
         </div>
       )}
