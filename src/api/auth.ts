@@ -1,9 +1,10 @@
 import axios from 'axios';
 
+// API client configuration with proper baseURL and auth headers
 const API = import.meta.env.VITE_API_BASE || 'https://hr-production-c212.up.railway.app/api';
 console.log('API URL:', API); //
 
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: API,
   headers: {
     'Content-Type': 'application/json',
