@@ -191,7 +191,7 @@ export default function RecruiterPanel() {
     <div className="min-h-screen bg-gray-900">
       <div className="max-w-7xl pl-[calc(1.5rem+20px)] pr-6 py-6 mx-auto">
       {/* Header Compacto */}
-      <div className="mb-6">
+      <div className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div className="flex-1">
             <h1 className="text-2xl font-bold text-white flex items-center">
@@ -218,7 +218,7 @@ export default function RecruiterPanel() {
       <SearchPresets onApplyPreset={applyPreset} />
 
       {/* Filtros de Búsqueda */}
-      <div className="p-6 mb-6 bg-white/5 border border-white/10 rounded-lg">
+      <div className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
         <h2 className="text-lg font-semibold mb-4 text-white flex items-center">
           <span className="text-xs mr-2">🔍</span>
           Filtros de Búsqueda
@@ -408,7 +408,7 @@ export default function RecruiterPanel() {
       {result && result.count > 0 && !loading && (
         <div className="space-y-4">
           {/* Search Summary */}
-          <div className="p-4 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-lg">
+          <div className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
             <h3 className="text-sm font-semibold text-indigo-300 mb-2 flex items-center">
               <span className="mr-2">📊</span>
               Resumen de Búsqueda
@@ -443,7 +443,7 @@ export default function RecruiterPanel() {
 
           {/* Candidates */}
           {pageItems.map((c: Candidate, index: number) => (
-            <div key={c.cvId} className="p-4 bg-white/5 border border-white/10 rounded-lg hover:bg-white/8 transition-all">
+            <div key={c.cvId} className="p-4 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl hover:bg-white/10 transition-all shadow-lg">
               {/* Header with Score */}
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                 <div className="flex items-center gap-3">
@@ -584,7 +584,7 @@ export default function RecruiterPanel() {
 
       {/* Analytics Section */}
       {result && result.count > 0 && !loading && (
-        <div className="mt-8 p-6 bg-gradient-to-br from-indigo-500/5 to-purple-500/5 border border-indigo-500/20 rounded-lg">
+        <div className="mt-8 p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
           <Analytics 
             candidates={sortedCandidates}
           />
