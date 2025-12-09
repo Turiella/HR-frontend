@@ -12,6 +12,15 @@ export const apiClient = axios.create({
   withCredentials: true,
 });
 
+// Add JWT token to all requests
+apiClient.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 export const login = async (email: string, password: string) => {
   const res = await apiClient.post('/auth/login', { email, password });
   return res.data;
