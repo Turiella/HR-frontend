@@ -21,7 +21,7 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
 
   return (
     <div className="mb-6">
-      <h3 className="glass-title flex items-center text-sm">
+      <h3 className="glass-title flex items-center text-xs">
         <span className="mr-2">🚀</span>
         Búsquedas Rápidas (Presets)
       </h3>
@@ -40,7 +40,7 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
           >
             <div className="flex items-center mb-1">
               <span className="text-base mr-2 group-hover:scale-110 transition-transform">{preset.icon}</span>
-              <span className="font-semibold text-white text-xs">{preset.name}</span>
+              <span className="font-semibold text-white text-[10px]">{preset.name}</span>
             </div>
             <p className="glass-text text-gray-300 mb-2">{preset.description}</p>
             <div className="space-y-1">
@@ -49,7 +49,7 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
                   ? preset.requiredSkills.map((skill, index) => (
                       <span 
                         key={index}
-                        className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
+                        className="inline-block px-2 py-0.5 rounded text-[10px] font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
                       >
                         {skill}
                       </span>
@@ -59,7 +59,7 @@ export const SearchPresets: React.FC<SearchPresetsProps> = ({ onApplyPreset }) =
                       .map((skill, index) => (
                         <span 
                           key={index}
-                          className="inline-block px-2 py-0.5 rounded text-xs font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
+                          className="inline-block px-2 py-0.5 rounded text-[10px] font-medium bg-green-500/20 text-green-300 whitespace-nowrap"
                         >
                           {skill.trim()}
                         </span>

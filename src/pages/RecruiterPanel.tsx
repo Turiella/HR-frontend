@@ -99,7 +99,7 @@ useEffect(() => {
         console.error('Error loading CV count:', error);
       }
       alert(MESSAGES.ERROR.LOADING_CV_COUNT);
-    }
+        }
   };
 
   fetchCvCount();
@@ -202,44 +202,45 @@ useEffect(() => {
 
   return (
     <div className="min-h-screen bg-gray-900">
-      <div className="max-w-7xl pl-[calc(1.5rem+20px)] pr-6 py-6 mx-auto">
-      {/* Header Compacto */}
-      <div className="mb-6 p-6 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl shadow-xl">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="flex-1">
-            <h1 className="text-2xl font-bold text-white flex items-center">
-              <span className="text-sm mr-2">🎯</span>
-              Panel de Reclutador
+      <div className="max-w-2xl pl-[calc(1.5rem+10px)] pr-6 py-6 mx-auto">
+      {}
+      <div className="mb-6 p-6 bg-white/10 backdrop-blur-md rounded-2xl shadow-xl">
+             <div className="flex items-center justify-start gap-4">
+  <div className="flex flex-col items-center gap-3">
+    {cvCount != null && (
+      <div className="glass-container inline-flex">
+        <div className="flex items-center">
+          <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+          <span className="text-xs text-white">
+            <span className="font-medium">{cvCount}</span> CVs en base
+          </span>
+        </div>
+      </div>
+    )}
+    <LogoutButton variant="header" />
+  </div>
+  <div className="text-left" >
+    <h1 className="text-lg font-bold text-white flex items-center justify-center">
+      <span className="text-sm mr-2"></span> Panel de Reclutador
             </h1>
             <p className="mt-1 text-sm text-gray-400">Filtrá candidatos y generá un ranking basado en skills, experiencia y descripción del puesto.</p>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            {cvCount != null && (
-              <div className="inline-flex items-center px-3 py-1.5 bg-green-500/10 border border-green-500/30 rounded-lg">
-                <span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                <span className="text-sm text-green-300">
-                  <span className="font-medium">{cvCount}</span> CVs en base
-                </span>
-              </div>
-            )}
-            <LogoutButton variant="header" />
           </div>
-        </div>
       </div>
 
       {/* Layout con CSS Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 280px', gap: '20px', alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '15px', alignItems: 'start' }}>
         {/* Columna izquierda - Contenido principal */}
         <div>
           {/* Filtros de Búsqueda */}
-          <div className="p-6 mb-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl shadow-xl">
-        <h2 className="text-lg font-semibold mb-4 text-white flex items-center">
+          <div className="p-4 mb-4 glassmorphism-panel">
+        <h2 className="text-sm font-semibold mb-3 text-white flex items-center">
           <span className="text-xs mr-2">🔍</span>
           Filtros de Búsqueda
         </h2>
         <div className="grid gap-4 md:grid-cols-3">
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Habilidades Requeridas (coma separadas)
               <FieldHelp 
                 field="Habilidades Requeridas" 
@@ -256,7 +257,7 @@ useEffect(() => {
             />
           </div>
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Habilidades Preferidas (coma separadas)
               <FieldHelp 
                 field="Habilidades Preferidas" 
@@ -273,7 +274,7 @@ useEffect(() => {
             />
           </div>
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Años mínimos de experiencia
               <FieldHelp 
                 field="Experiencia Mínima" 
@@ -293,7 +294,7 @@ useEffect(() => {
             />
           </div>
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium">Género</label>
+            <label className="block mb-1 text-xs font-medium">Género</label>
             <select className="w-full p-2 bg-black/20 border border-white/10 rounded outline-none focus:ring-2 focus:ring-indigo-500" value={gender} onChange={e => setGender(e.target.value)}>
               <option value="">Cualquiera</option>
               <option value="masculino">Masculino</option>
@@ -302,7 +303,7 @@ useEffect(() => {
             </select>
           </div>
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Ciudades (coma separadas)
               <FieldHelp 
                 field="Ubicación" 
@@ -320,7 +321,7 @@ useEffect(() => {
           </div>
           
           <div className="md:col-span-1">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Distancia máx (km)
               <FieldHelp 
                 field="Distancia Máxima" 
@@ -340,7 +341,7 @@ useEffect(() => {
             />
           </div>
           <div className="md:col-span-3">
-            <label className="block mb-1 text-sm font-medium flex items-center">
+            <label className="block mb-1 text-xs font-medium flex items-center">
               Descripción del puesto / Prompt
               <FieldHelp 
                 field="Descripción del Puesto" 
@@ -613,11 +614,9 @@ useEffect(() => {
         </div>
 
         {/* Columna derecha - Presets */}
-        <div>
-          <div className="glass-container">
+        <div className="glassmorphism-panel p-3">
             <SearchPresets onApplyPreset={applyPreset} />
           </div>
-        </div>
       </div>
       </div>
     </div>
