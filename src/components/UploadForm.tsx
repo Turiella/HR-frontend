@@ -1,9 +1,57 @@
 import { useState } from 'react';
-import { uploadCv } from '../api/cv';
+
+interface CVAnalysis {
+  skills?: string[];
+  experience?: number;
+  education?: string;
+  summary?: string;
+  [key: string]: unknown;
+}
+import axios from 'axios';
+
+const uploadCvDirect = async (file: File, opts: { category?: string; setPrimary?: boolean }, token: string) => {
+  const formData = new FormData();
+  
+  // Enviar solo el campo que espera multer: 'cv'
+  formData.append('cv', file);
+  
+  if (opts.category) {
+    formData.append('category', opts.category);
+  }
+  
+  if (opts.setPrimary) {
+    formData.append('setPrimary', 'true');
+  }
+
+  try {
+    const res = await axios.post('https://hr-production-c212.up.railway.app/api/cvs/upload', formData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+        'Accept': 'application/json'
+      },
+      timeout: 30000 // 30 segundos timeout
+    });
+    return res.data as { cvId: number; analysis: CVAnalysis };
+  } catch (error) {
+    // Si falla, intentar con estructura simplificada
+    console.log('Error en primer intento, intentando formato simplificado:', error);
+    const simpleFormData = new FormData();
+    simpleFormData.append('file', file);
+    
+    const res = await axios.post('https://hr-production-c212.up.railway.app/api/cvs/upload', simpleFormData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return res.data as { cvId: number; analysis: CVAnalysis };
+  }
+};
 
 const UploadForm = () => {
   const [file, setFile] = useState<File | null>(null);
-  const [analysis, setAnalysis] = useState<any>(null);
+  const [analysis, setAnalysis] = useState<CVAnalysis | null>(null);
   const [loading, setLoading] = useState(false);
   const [category, setCategory] = useState('it');
   const [makePrimary, setMakePrimary] = useState(true);
@@ -17,7 +65,7 @@ const UploadForm = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token') || '';
-      const res = await uploadCv(file, { category, setPrimary: makePrimary }, token);
+      const res = await uploadCvDirect(file, { category, setPrimary: makePrimary }, token);
       setAnalysis(res.analysis);
       alert('✅ CV subido y analizado correctamente');
     } catch (err) {
